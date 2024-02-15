@@ -17,6 +17,32 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getProductByName = async (req, res) => {
+  const namaBarang = req.query.name;
+  try {
+    const [data] = await userModels.getProductByName(namaBarang);
+    if (data.length == 0) {
+      res.json({
+        message: "get data dari tbl_barang kosong",
+        status: false,
+        data: data,
+      });
+    } else {
+      res.json({
+        message: "get data dari tbl_barang berhasil",
+        status: true,
+        data: data,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "server error",
+      status: false,
+      serverMessage: error,
+    });
+  }
+};
+
 const createNewProduct = async (req, res) => {
   const body = req.body;
   try {
@@ -37,7 +63,7 @@ const createNewProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const body = req.body;
-  const id =  req.query.id;
+  const id = req.query.id;
   try {
     await userModels.updateProduct(body, id);
     res.json({
@@ -73,7 +99,8 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  getProductByName,
   createNewProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 };

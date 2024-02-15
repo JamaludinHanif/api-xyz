@@ -11,6 +11,7 @@ const login = async (req, res) => {
         message: "login berhasil",
         status: true,
         loginAs: data[0].tipe_user,
+        username: data[0].username
       });
     } else if (data.length > 1) {
       res.json({

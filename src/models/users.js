@@ -6,6 +6,12 @@ const getAllUsers = () => {
   return dbPool.execute(SQL);
 };
 
+const getUserByName = (username) => {
+  const SQL = `SELECT * FROM tbl_user WHERE username LIKE '%${username}%'`;
+
+  return dbPool.execute(SQL);
+};
+
 const createNewUsers = (body) => {
   const SQL = ` INSERT INTO tbl_user (id_user, tipe_user, nama, alamat, telepon, username, password) 
     VALUES ('', '${body.tipe_user}', '${body.nama}', '${body.alamat}', '${body.telepon}', '${body.username}', '${body.password}')`;
@@ -29,7 +35,8 @@ const deleteUser = (id) => {
 
 module.exports = {
   getAllUsers,
+  getUserByName,
   createNewUsers,
   deleteUser,
-  updateUser
+  updateUser,
 };

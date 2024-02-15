@@ -1,35 +1,39 @@
-require('dotenv').config();
+require("dotenv").config();
 const PORT = process.env.PORT;
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
 
 // router
 const userRoutes2 = require("./routes/users2");
-const userRoutes = require('./routes/users')
-const loginRoutes = require('./routes/login')
-const productRoutes = require('./routes/produk')
+const userRoutes = require("./routes/users");
+const loginRoutes = require("./routes/login");
+const productRoutes = require("./routes/produk");
+const logRoutes = require("./routes/logActivity");
 
 const middleWare = require("./middleware/logs");
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 // middleware
 app.use(middleWare.logRequest);
 app.use(express.json());
 
 // tes
-app.use("/tes", userRoutes2);  
+app.use("/tes", userRoutes2);
 
 // users admin xyz
-app.use('/users', userRoutes);
+app.use("/users", userRoutes);
 
 // login
-app.use('/login', loginRoutes);
+app.use("/login", loginRoutes);
 
 // produk
-app.use('/produk', productRoutes);
+app.use("/products", productRoutes);
+
+// log activity
+app.use("/logs", logRoutes);
 
 app.listen(PORT, () => {
   console.log(`server berhasil jalan di port ${PORT}`);

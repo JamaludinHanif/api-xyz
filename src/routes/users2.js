@@ -9,7 +9,7 @@ const userController = require('../controller/users2')
 router.get('/', userController.getAllUsers)
 
 // get user by id
-router.get('/user', userController.getUser)
+router.get('/te', userController.getUser)
 
 // post data user
 router.post('/', userController.createNewUsers)

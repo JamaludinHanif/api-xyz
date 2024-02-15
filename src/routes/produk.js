@@ -6,6 +6,9 @@ const userController = require("../controller/produk");
 // GET barang
 router.get("/", userController.getAllProducts);
 
+// get produk by name
+router.get('/product', userController.getProductByName)
+
 // create newUser
 router.post("/", userController.createNewProduct);
 

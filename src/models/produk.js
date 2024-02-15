@@ -6,6 +6,12 @@ const getAllProducts = () => {
   return dbPool.execute(SQL);
 };
 
+const getProductByName = (namaBarang) => {
+  const SQL = `SELECT * FROM tbl_barang WHERE nama_barang LIKE '%${namaBarang}%'`;
+
+  return dbPool.execute(SQL);
+};
+
 const createNewProduct = (body) => {
   const SQL = ` INSERT INTO tbl_barang (id_barang, kode_barang, nama_barang, expired_date, jumlah_barang, satuan, harga_satuan) 
     VALUES ('', '${body.kode_barang}', '${body.nama_barang}', '${body.expired_date}', '${body.jumlah_barang}', '${body.satuan}', '${body.harga_satuan}')`;
@@ -29,7 +35,8 @@ const deleteProduct = (id) => {
 
 module.exports = {
   getAllProducts,
+  getProductByName,
   createNewProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
 };
